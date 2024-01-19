@@ -28,13 +28,11 @@ class CustomImageDataset(Dataset):
         self.file_path_list = __structure__(self)
 
         def __transformation__(self, image):
+            image = image[:3, :, :]
             if transform == "scale_224":
-                image = image[:3, :, :]
-                # image = rgb_to_grayscale(image)
                 resize_transform = Resize((224, 224))
                 image = resize_transform(image)
             if transform == "grayscale":
-                image = image[:3, :, :]
                 image = rgb_to_grayscale(image)
 
             image = torch.tensor(
